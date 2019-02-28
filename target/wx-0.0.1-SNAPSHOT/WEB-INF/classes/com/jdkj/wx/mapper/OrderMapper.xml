@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jdkj.wx.mapper.OrderMapper">
+
+	<resultMap id="orderMap" type="com.jdkj.wx.entity.Order">
+        <id column="oid" property="id"/>
+        <result column="oTime" property="oTime" />
+        <result column="isValid" property="isValid" />
+        <result column="price" property="price" />
+        <result column="payPrcie" property="payPrcie" />
+        
+         <association property="goods" javaType="com.jdkj.wx.entity.Goods">
+			<id column="gid" property="id" />
+			<result column="titleName" property="titleName" />
+            <result column="titleImage" property="titleImage" />
+            <result column="sufTime" property="sufTime" />
+            
+		</association>
+       
+
+		<association property="seller" javaType="com.jdkj.wx.entity.Seller">
+			<id column="sid" property="id" />
+            <result column="name" property="name" />
+            <result column="phoneNum" property="phoneNum" />
+            <result column="phoneName" property="phoneName" />
+		</association>
+		</resultMap>
+    <select id="getOrder" parameterType="com.jdkj.wx.query.BaseQuery" resultMap="orderMap">
+       SELECT o.id oid,o.oTime,o.isValid,o.price,o.payPrice,s.id sid,s.name name,s.phoneName,s.phoneNum,g.id gid,g.titleName titleName,
+       g.titleImage titleImage,g.sufTime sufTime
+			from j_order o
+			Left JOIN j_seller s on o.seller_id=s.id 
+			Left JOIN j_goods g on o.goods_id=g.id
+			WHERE o.user_id=#{userId} order by o.oTime desc limit #{begin},#{end}
+    </select>
+<!-- 	**************************************************************************************************** -->
+    
+
+    <resultMap id="sellerMap" type="com.jdkj.wx.entity.Order">
+        <id column="oid" property="id"/>
+        <result column="oTime" property="oTime" />
+        <result column="isValid" property="isValid" />
+        <result column="name" property="name" />
+        <result column="phoneNum" property="phoneNum" />
+        <result column="price" property="price" />
+        <result column="payPrice" property="payPrice" />
+        
+         <association property="goods" javaType="com.jdkj.wx.entity.Goods">
+			<id column="gid" property="id" />
+			<result column="titleImage" property="titleImage" />
+            <result column="titleName" property="titleName" />
+             <result column="sufTime" property="sufTime" />
+		</association>
+       
+
+		<association property="user" javaType="com.jdkj.wx.entity.User">
+			<id column="uid" property="id" />
+		</association>
+		
+    </resultMap>
+    <select id="getSellerOrder" parameterType="com.jdkj.wx.query.OrderQuery" resultMap="sellerMap">
+       SELECT o.id oid,o.oTime,o.isValid,o.name,o.phoneNum,o.price,o.payPrice,u.id uid,g.id gid,
+       g.titleImage,g.titleName titleName,g.sufTime
+			from j_order o
+			Left JOIN j_user u on u.id=o.user_id 
+			Left JOIN j_goods g on o.goods_id=g.id 
+			WHERE o.seller_id=#{userId} AND (u.phoneName LIKE CONCAT('%',#{keyWords},'%')
+			OR u.phoneNum LIKE CONCAT('%',#{keyWords},'%'))
+			order by o.oTime desc limit #{begin},#{end}
+    </select>
+	<!-- 	**************************************************************************************************** -->
+	
+	<!--  	
+	使用XML定义新增时可以使用到全局的useGeneratedKeys
+	<insert id="addCompany" keyProperty="id">
+		INSERT INTO company VALUES(NULL, #{name})
+	</insert>
+	-->	
+	
+	<update id="updateOrder" parameterType="int">
+		update j_order set isValid=2 
+		<where>
+			<!-- 应用sql片段的id，如果refid指定的id不再本mapper文件中，需要前边加namespace -->
+			<include refid="query_order_where"></include>
+			<!-- 在这里还可能要引用其他的sql片段 -->
+		</where>
+	</update>
+	
+	<sql id="query_order_where">
+	<if test="list!=null||list.size()!=0"> 
+		<foreach collection="list" item="id" open="AND (" close=")" separator="OR">
+			id = #{id}
+		</foreach>
+	</if>
+	</sql>
+	
+		
+
+	
+</mapper>

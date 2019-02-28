@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jdkj.wx.mapper.GoodsImageMapper">
+
+
+		<insert id="addAll" parameterType="com.jdkj.wx.entity.GoodsImage">
+			insert into j_goods_image(id,image,goods_id) values
+		<if test="list!=null||list.size()!=0"> 
+		<foreach collection="list" item="goodsImage" separator=",">
+			(null,#{goodsImage.image},#{goodsImage.goods.id})
+		</foreach>
+		</if>
+		</insert>
+	
+
+	
+</mapper>

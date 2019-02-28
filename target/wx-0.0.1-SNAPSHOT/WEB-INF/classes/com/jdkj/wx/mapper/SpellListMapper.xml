@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jdkj.wx.mapper.SpellListMapper">
+
+	
+	<!--  	
+	使用XML定义新增时可以使用到全局的useGeneratedKeys
+	<insert id="addCompany" keyProperty="id">
+		INSERT INTO company VALUES(NULL, #{name})
+	</insert>
+	-->	
+	
+	<resultMap id="map" type="com.jdkj.wx.entity.SpellList">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="startTime" property="startTime" />
+        <result column="endTime" property="endTime" />
+        <result column="price" property="price" />
+        <result column="num" property="num" />
+        <result column="state" property="state" />
+        <result column="uId" property="userListId"/>
+        <result column="rname" property="name"/>
+    </resultMap>
+    
+   <select id="getByUserId" parameterType="com.jdkj.wx.entity.UserSpellList" resultMap="map">
+      SELECT l.*,u.id uId,r.name rname  FROM j_list l
+      left join j_user_list u on l.id =u.list_id
+      left join j_user r on u.user_id=r.id
+       WHERE u.user_id=#{userId} and l.id=#{listId}
+    </select>
+    
+    
+    
+    
+    
+    
+    <!-- 拿到我的所有拼团 -->
+	
+    <resultMap id="map1" type="com.jdkj.wx.entity.SpellList">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="startTime" property="startTime" />
+        <result column="endTime" property="endTime" />
+        <result column="price" property="price" />
+        <result column="num" property="num" />
+        <result column="state" property="state" />
+        
+        
+		<association property="goods" javaType="com.jdkj.wx.entity.Goods">
+			<id column="gId" property="id" />
+			<result column="titleName" property="titleName" />
+            <result column="titleImage" property="titleImage" />
+		</association>
+		
+		
+    </resultMap>
+    
+   <select id="getByUserIdAll" parameterType="com.jdkj.wx.query.SpellListQuery" resultMap="map1">
+     SELECT l.*,g.id gId,g.titleName,g.titleImage FROM j_list l 
+     left join j_user_list u on l.id =u.list_id
+     left join j_goods g on g.id =l.goods_id
+     WHERE u.user_id=#{userId}
+     order by state asc limit #{begin},#{end}
+    </select>
+    
+    <!-- 拿到所有拼团 -->
+    
+    <resultMap id="map2" type="com.jdkj.wx.entity.SpellList">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="startTime" property="startTime" />
+        <result column="endTime" property="endTime" />
+        <result column="price" property="price" />
+        <result column="num" property="num" />
+        <result column="state" property="state" />
+        
+        
+		<association property="goods" javaType="com.jdkj.wx.entity.Goods">
+			<id column="gId" property="id" />
+			<result column="titleName" property="titleName" />
+            <result column="titleImage" property="titleImage" />
+		</association>
+		
+		
+    </resultMap>
+    
+   <select id="getAllQuery" parameterType="com.jdkj.wx.query.SpellListQuery" resultMap="map2">
+     SELECT l.*,g.id gId,g.titleName,g.titleImage FROM j_list l 
+    left join j_goods g on g.id =l.goods_id
+    order by state asc limit #{begin},#{end}
+    </select>
+    
+    
+    
+    
+    
+    
+    
+     <resultMap id="map3" type="com.jdkj.wx.entity.UserSpellList">
+        <id column="nId" property="id" jdbcType="INTEGER"/>
+        <result column="userId" property="userId" />
+        <result column="listId" property="listId" />
+    </resultMap>
+    
+   <select id="getUserBySpellFail" resultMap="map3">
+    SELECT nt.user_id userId,nt.id nId,nt.list_id listId from (select *,count(*) cou from j_user_list group BY(id))nt 
+	LEFT JOIN j_list l on nt.list_id=l.id where l.num>nt.cou and l.state=3 and nt.cue=1;
+
+    </select>
+    
+    
+    
+    
+    
+   
+     <resultMap id="map4" type="com.jdkj.wx.entity.SpellList">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="startTime" property="startTime" />
+        <result column="endTime" property="endTime" />
+        <result column="price" property="price" />
+        <result column="num" property="num" />
+        <result column="state" property="state" />
+        
+        
+		<association property="goods" javaType="com.jdkj.wx.entity.Goods">
+			<id column="gId" property="id" />
+			<result column="titleName" property="titleName" />
+            <result column="titleImage" property="titleImage" />
+		</association>
+		<association property="seller" javaType="com.jdkj.wx.entity.Seller">
+			<id column="sId" property="id" />
+		</association>
+    </resultMap>
+    
+   <select id="getById" parameterType="int" resultMap="map4">
+    SELECT l.*,g.id gId,s.id sId FROM j_list l 
+    left join j_goods g on g.id=l.goods_id 
+    left join j_seller s on s.id=l.seller_id 
+    WHERE l.id=#{id}
+    </select>
+    
+    
+    
+</mapper>

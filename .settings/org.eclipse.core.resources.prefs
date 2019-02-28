@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/resources/config.properties=UTF-8
+encoding//src/main/resources/log4j.properties=UTF-8
+encoding//src/main/webapp/WEB-INF/views/common/footer.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/common/import3.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/wx/index.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/wx/test.jsp=UTF-8
+encoding//src/test/java=UTF-8
+encoding//src/test/resources=UTF-8
+encoding/<project>=UTF-8

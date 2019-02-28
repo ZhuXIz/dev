@@ -1,0 +1,366 @@
+div .messageLeft:link    {color:blue;}
+div .messageLeft:visited {color:#ff0000;}
+div .messageLeft:hover   {color:gray;}
+span .commonMenu:hover{color: red;}
+span .commonMenu:link{color: red;}
+div .messageRight:visited {color:gray;}
+div .messageRight:hover   {color:gray;}
+/*  div .messageLeft:active  {color:yellow;} */
+
+/*轮播图下方title*/
+div .goodsTitle{
+	width: 100%;
+	height:50px;
+	background:rgba(220, 211, 144, 0.09);
+}
+.titleName{
+	width: 70%;
+	float: left;
+	font-size:100%;
+	font-weight: bold;
+	height:50px;
+}
+.titleRight{
+	width: 30%;
+	float: right;
+	font-style: italic;
+	font-weight: bold;
+	text-align:center;
+	font-size: 90%;
+
+}
+.brow{
+	width: 40%;
+	float: left;
+	font-style: italic;
+	font-weight: bold;
+	text-align:center;
+	font-size: 90%;
+	height:50px;
+}
+.coll{
+	width: 40%;
+	float: right;
+	font-style: italic;
+	font-weight: bold;
+	text-align:center;
+	height:50px;
+	font-size: 90%;
+}
+
+/*商家title背景*/
+div .back{
+	width: 100%;
+	text-align: center;
+	background:rgba(69, 239, 162, 0.09);
+}
+.sellerTitle{
+	color:rgb(187, 113, 48);
+	font-size:100%;
+	font-weight: bold;
+}
+div .messageLeft{
+	color:gray;
+	width: 50%;
+	float: left;
+	font-style: oblique;
+	font-weight: bold;
+}
+div .messageRight{
+	width: 50%;
+	float: right;
+	font-style: oblique;
+	font-weight: bold;
+}
+.buy{
+	MARGIN-RIGHT: auto;
+	MARGIN-LEFT: auto;
+	vertical-align:middle;
+	background-color: yellow;
+	line-height: 50px;
+	height:100px;
+	color:rgb(255,255,255);
+}
+.commonMenu{
+	MARGIN-RIGHT: auto;
+	MARGIN-LEFT: auto;
+	vertical-align:middle;
+	line-height:50px; 
+	height:100px;
+
+}
+.priceHome{
+	width:50%;
+	font-size:20px;
+	font-weight:bold;
+	font-style:italic;
+	float: right;
+}
+.soldSpan{
+	width:50%;
+	font-size:10px;
+	font-style:italic;
+	float: left;
+}
+div .priceCue{
+	font-style:italic;
+	float: right;
+	font-size:20px;
+	font-weight:bold;
+}
+.price{
+	width:20%;
+	font-size:20px;
+	font-style:italic;
+	float: right;
+	color: red;
+}
+.oldPrice {
+	text-decoration:line-through;
+	width:20%;
+	font-size:15px;
+	font-style:oblique;
+	float: right;
+}
+
+.goodsShow{
+	text-align: center;
+	width: 100%;
+	height: auto;
+}
+.goodsShowLeft{
+	width: 50%;
+	height: 240px; 
+	float: left;
+	
+}
+.myColl{
+	width: 100%;
+}
+.goodsShowRight{
+	width: 50%;
+	height: 240px; 
+	float: right;
+}
+#cueImage{
+	max-width:50%;
+}
+.cueImage{
+	position:absolute;
+	z-index:1;
+	text-align: left;
+}
+.service{
+	position:fixed;
+	right:5px;
+	bottom:5px;
+}
+.service a img{
+	position:fixed;
+	bottom:20%;
+	right:0px;
+	max-width: 20%;
+}
+.phone{
+	max-width:10%;
+}
+.MyOrder{
+	background-color:rgba(206, 199, 48, 0.37);
+	width: 100%;
+}
+.titleImage{
+	width: 100%;
+	height: 160px;
+}
+.title{
+	width: 100%;
+	text-align:left;
+	float:left;
+
+}
+.content{
+	
+	font-size:20px;
+	font-style:none;
+	width: 100%;
+	text-align: center;
+}
+.itemImage{
+	max-width: 100%;
+}
+.itemText{
+	padding-top:10px;
+	padding-bottom:25px;
+	width:100%;
+	height:50px;
+	text-align: center;
+}
+.evaContent{
+	width: 100%;
+	font-size: 10px;
+	background-color: rgba(218, 218, 159, 0.7);
+}
+
+.evaName{
+	width: 100%;
+	text-align: left;
+}
+.evaMsg{
+	width: 100%;
+	text-align: left;
+}
+.evaTime{
+	width: 100%;
+	text-align: right;
+}
+.headImage{
+	margin-top:5px;
+}
+.img-container{
+	text-align: center;
+}
+.headName{
+	width:100%;
+	text-align: center;
+	margin-top:10px;
+}
+.headName span{
+	font-size: 20px;
+	font-weight: bold;
+}
+.btnContent{
+	background: rgba(241, 251, 255, 0.56);
+}
+.commonButton{
+	margin-top:15px;
+	text-align:center;
+	background:rgb(47, 47, 47);
+	width: 100%;
+}
+
+.commonButton>a{
+	font-size:30px;
+	color: white;
+}
+	
+
+
+.sellerContent{
+	text-align: center;
+	width: 100%;
+	background-color: #ffffff000;
+}
+.sellerText{
+	width: 100%;
+	font-size: 15px;
+	color: gray;
+	height:480px;
+	display: flex;
+    justify-content:center;
+    align-items:Center;
+  	font-weight: bold;
+}
+
+.sellerText a{
+	color: rgb(0, 253, 208);
+}
+.preName{
+	width:100%;
+	text-align: center;
+	background-color: rgba(68, 226, 78, 0.12);
+	height: 40px;
+	display: flex;
+    justify-content:center;
+    align-items:Center;
+    
+}
+.preName2{
+	width:100%;
+	text-align: center;
+	background-color: rgba(181, 189, 21, 0.12);
+	height: 40px;
+	display: flex;
+    justify-content:center;
+    align-items:Center;
+}
+.preName span{
+	color:gray;
+	font-size: 5px;
+}
+.col-sm-10{
+	width:100%;
+	display: flex;
+    justify-content:center;
+    align-items:Center;
+}
+.inputCom{
+	display: flex;
+	margin-top:10px;
+	margin-bottom:10px;
+    justify-content:center;
+}
+.autoImg{
+	width:23%;
+	height:75px;
+	margin-top: 5px;
+}
+.goodstitleImage{
+	width:23%;
+	height:75px;
+	margin-top: 5px;
+}
+.commonImg{
+	max-width: 100%;
+
+}
+#upload{
+	
+	display: none;
+}
+#imagesUpload{
+	display: none;
+}
+#htmlUpload{
+	display: none;
+}
+.goodsImageShow{
+	width: 100%;
+}
+
+.sold{
+	display: flex;
+    justify-content:center;
+    align-items:Center;
+	width: 100%;
+}
+.res{
+	display: flex;
+    justify-content:center;
+    align-items:Center;
+}
+.btnCon{
+	width: 100%;
+
+	text-align: center;
+}
+
+/*图标按钮*/
+.icon{
+	width: 30%;
+	float: left;
+	text-align: center;
+    background-color:rgba(245, 255, 185, 0.29);
+}
+ .icon a img{
+	
+     max-width:15%;
+     min-height:15%;
+     display:initial;
+ }
+ .icon a{
+	color: black;
+ 	text-align:center;
+  	max-width:1em;
+ }
+
+

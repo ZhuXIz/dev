@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 获取自增主键值 -->
+		<setting name="useGeneratedKeys" value="true" />
+		<!-- 自动映射，把数据库表的字段名（create_time）与实体的属性（createTime）自动映射 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+</configuration>

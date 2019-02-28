@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task.xsd">
+        
+    <!-- 开启注解支持 -->
+	<context:annotation-config />
+    
+    <!-- 允许使用注解配置Bean：@Component、@Controller、@Service、@Repository等 -->
+	<context:component-scan base-package="com.jdkj.wx">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+        
+    <!-- 添加Aspectj的支持 -->
+	<aop:aspectj-autoproxy />    
+        
+    <!-- Spring 读取properties配置文件 -->
+	<context:property-placeholder
+		file-encoding="UTF-8" location="classpath:config.properties" />
+	
+	<!-- 与MyBatis的整合 -->
+	<import resource="spring-mybatis.xml" />
+	
+	
+	<!-- 定时任务 -->
+	<task:annotation-driven/> 
+	<context:component-scan base-package="com.jdkj.wx.common.task.MyTask"/>  
+
+
+</beans>

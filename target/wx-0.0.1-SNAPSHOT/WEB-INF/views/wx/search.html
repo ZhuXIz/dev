@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html class="pixel-ratio-1" style="font-size: 18px !important;"><head>
+    <!-- Mobile Devices Support @begin -->
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Mobile Devices Support @end -->
+    <title>
+                    资中新生活优选    </title>
+    <meta name="keywords" content="资中新生活优选">
+    <meta name="description" content="资中新生活优选">
+    <link rel="stylesheet" href="https://ui.fhcloudapi.cn/urmyx/css/weui.min.css?t=4.4.91">
+    <link rel="stylesheet" href="https://ui.fhcloudapi.cn/urmyx/css/jquery-weui.min.css?t=4.4.91">
+    <link rel="stylesheet" href="https://ui.fhcloudapi.cn/urmyx/font/iconfont.css?t=4.4.97">
+    <link rel="stylesheet" href="https://ui.fhcloudapi.cn/urmyx/css/phone.css?t=4.4.91">
+    <link rel="stylesheet" href="https://ui.fhcloudapi.cn/urmyx/css/custom02/main.css?t=4.4.70.43">
+    <script src="https://ui.fhcloudapi.cn/urmyx/js/jquery2.1.0.js" type="text/javascript"></script>
+    <script src="https://ui.fhcloudapi.cn/urmyx/js/jquery-weui.min.js"></script>
+    <script src="https://ui.fhcloudapi.cn/urmyx/js/height.js?t=1.0.3"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.0.js"></script>
+    <style>
+        html { 
+            font-size: calc(12 * (100vw) / 320)!important;
+        }
+        #Protocol{
+            display: none;
+            position: fixed;
+            z-index: 21;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #Protocol .bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+        }
+        #Protocol .protocol-box{
+            position: absolute;
+            left: 7%;
+            top: 46%;
+            transform: translateY(-50%);
+            width:86%;
+            background:rgba(255,255,255,1);
+            border-radius:16px;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+            background: #ffffff;
+            padding: 1.7rem;
+            box-sizing: border-box;
+        }
+        #Protocol .title{
+            font-size:1.28rem;
+            color:rgba(34,34,34,1);
+            text-align: center;
+            margin-bottom: 1.95rem;
+        }
+        #Protocol .mycontent{
+            max-height:14.2rem;
+            font-size:0.924rem;
+            color:rgba(134,134,134,1);
+            line-height:1.7rem;
+            overflow-y: scroll;
+        }
+        #Protocol .more-link{
+            margin: 1.70rem 0;
+            font-size:0.85rem;
+            color:rgba(34,34,34,1);
+        }
+        #Protocol .more-link .link-box{
+            margin-top: 1.7rem;
+        }
+        #Protocol .more-link a{
+            color: #BD9300;
+            /*margin-right: 1rem;*/
+        }
+        #Protocol .more-link a:last-child{
+            margin-right: 0;
+        }
+        #Protocol .btn-box {
+            display: flex;
+            justify-content: center;
+        }
+        #Protocol .btn-box button{
+            width:8.53rem;
+            height:2.48rem;
+            border:2px solid rgba(174,174,174,1);
+            font-size:0.995rem;
+            color:rgba(174,174,174,1);
+            line-height:2.48rem;
+            border-radius: 2.48rem;
+            overflow: hidden;
+        }
+        #Protocol .btn-box .agree{
+            background: #FEDF00;
+            color:rgba(34,34,34,1);
+            border:2px solid #FEDF00;
+        }
+    </style>
+<meta name="urmtoken" content="55f6b90dc806cd3cf543a9552552dbef_19559d6815607b149a13e867c30ecf13"></head>
+<!-- 服务协议 -->
+<body><div class="m-actions action-atten" id="Protocol">
+    <div class="bg"></div>
+    <div class="protocol-box">
+        <div class="title">温馨提示</div>
+        <div class="mycontent ios-scroll">
+            <p>欢迎使用资中新生活优选提供的平台服务。 请您在使用服务前，仔细阅读并充分理解以下相关条款内容（特别是粗体下划线标注的内容），为方便您阅读内容，请点击下列协议链接，完整阅读全文。我们平台将以条款内全部内容来尽全力保护您的个人信息安全以及消费权益，且保证您与平台交易时平等且安全的进行消费行为。感谢您的信任与支持！</p>
+        </div>
+        <div class="more-link">
+            <p class="more-title">以下为协议阅读链接，可点击阅读全文：</p>
+            <div class="link-box">
+                <a href="/Home/Act/user_service_info/id/2.html">《用户隐私条款》</a>
+                <a href="/Home/Act/user_service_info/id/3.html">《平台服务协议》</a>
+                <!--<a href="/Home/Act/user_service_info/id/4.html">《交易规则》</a>-->
+            </div>
+        </div>
+        <div class="btn-box">
+            <!-- <button type="button" class="cancel">取消</button> -->
+            <button type="button" class="agree" id="xieyi">我知道了</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    document.addEventListener("error", function (e) {
+        var elem = e.target;
+        if (elem.tagName.toLowerCase() == "img") {
+            elem.src = "https://ui.fhcloudapi.cn/urmyx/img03/imgerror.png";
+        }
+    }, true);
+
+    </script>
+<script>
+    $(function(){
+        $.toast.prototype.defaults.duration = 1000;
+        $('.loginbt').on('click',function(){
+            //验证
+            var yancode = $('#yancode').val();
+            var phone = $('input[name=phone]').val();
+            var yan = isnormal_login(yancode,phone, '1');
+            var back_url = $('input[name=back_url]').val();
+            if(yan){
+                $.showLoading();
+                $.ajax({
+                    type:"post",
+                    url:"/Home/Act/login_do.html",
+                    data:{'tel':$('input[name=phone]').val(),'code':$('input[name=code]').val()},
+                    dataType:'json',
+                    success: function(msg){
+                        $.hideLoading();
+                        if(msg.code==200){
+                            $.toast('登录成功', "text",function(){
+                                if(back_url){
+                                    window.location.href = back_url
+                                }else{
+                                    $.closePopup();
+                                    $('#main').show();
+                                    // $('input[name=user_id]').val(msg.user_id);
+                                    // $('#name').val(msg.author);
+                                    // $('#phone').val(msg.mobile);
+                                    location.reload();
+                                }
+
+                            })
+                        }else{
+                            $.toast(msg.info, "text")
+                        }
+                    },
+                    error:function(){
+                        $.hideLoading();
+                        $.toast('网络不稳定，请稍后再试', "text")
+                    }
+                })
+            }
+            //计算
+        });
+
+
+        $('#xieyi').click(function(){
+            $.post("/Home/common/set_xieyi.html","",function(res){},'json');
+        })
+
+        var clicd = true;
+        $('.yanzheng').click(function(){
+            if(clicd){
+                var phone = $('input[name=phone]').val();
+                var _vcode = $('input[name=vcode]').val();
+                if(isnormal_login('111',phone, _vcode)){
+                    clicd = false;
+                    $('.yanzheng').text("发送中...");
+                    $.showLoading();
+                    $.ajax({
+                        type:"post",
+                        url:"/Home/Act/yanzheng.html",
+                        data:{'tel':$('input[name=phone]').val(), vcode: _vcode},
+                        dataType:'json',
+                        success: function(msg){
+                            $.hideLoading();
+                            if(msg.code==200){
+                                $.toast(msg.info, "text");
+                                settime();
+                            }else{
+                                $('.yanzheng').text("获取验证码");
+                                countdown = 60;
+                                clicd=true;
+                                $.toast(msg.info, "text")
+                            }
+
+                        },
+                        error:function(){
+                            $.hideLoading();
+                            $('.yanzheng').text("网络不稳定，请稍后再试");
+                            clicd = true;
+                        }
+                    })
+                }
+            }
+        });
+
+        //验证表单
+        function isnormal_login(y,p, vcode){
+
+            if(p=='' || p=='null'){
+                $.toast("手机号不能为空", "text",function() {
+                    $("#phone").focus();
+                });
+                return false;
+            }
+            if(!is_mobile(p)){
+                $.toast("手机号格式不正确", "text",function() {
+                    $("#phone").focus();
+                });
+                return false;
+            }
+                        if (vcode=='' || vcode=='null') {
+                    $.toast("请先输入图片验证码", "text",function() {
+                        $("#vcode").focus();
+                    });
+                    return false;
+                }
+                                    if(y=='' || y=='null'){
+                    $.toast("验证码不能为空", "text",function() {
+                        $("#yancode").focus();
+                    });
+                    return false;
+                }
+            
+            return true;
+        }
+
+        var countdown=60;
+        function settime() {
+
+            if (countdown == 0) {
+                $('.yanzheng').text("获取验证码");
+                countdown = 60;
+                clicd=true;
+                return;
+            } else {
+                $('.yanzheng').text("重新发送(" + countdown + ")");
+                countdown--;
+            }
+            setTimeout(function() {
+                settime()
+            },1000)
+        }
+        // 判断用户协议是否看过
+        var protocol = localStorage.getItem("protocol");
+        if (protocol != '1') {
+            localStorage.setItem("protocol","1");
+            $('#Protocol').show();
+        }
+        $('#Protocol').find('button').click(function(){
+            $('#Protocol').hide();
+        })
+
+    })
+
+    // function xcx_navigate(objc){
+    // 	 var ourlink = $(objc).attr('href')+'';
+    // 	 var pre_url = 'http://zzyx.zz0832.com';
+    // 	if(window.__wxjs_environment === 'miniprogram'){
+    // 		if(ourlink.indexOf("https")>-1){
+    // 			ourlink =ourlink
+    // 		}else{
+    // 			ourlink = pre_url+ourlink;
+    // 		}
+    // 			alert('')
+    // 		if(''>3){
+    // 			wx.miniProgram.reLaunch({url: '../act_info/act_info?ourlink='+ourlink})
+    // 		}else{
+    // 			wx.miniProgram.navigateTo({url: '../act_info/act_info?ourlink='+ourlink})
+    // 		}
+    // 		return false;
+    // 	}else{
+    // 		return true;
+    // 	}
+    // }
+</script>
+
+
+
+	<div class="wrap has_menu" style="background-color: transparent!important;">
+		<form action="" id="form">
+			<div class="search-area-wrap">
+				<div class="search-area">
+					<div class="weui-flex__item pos-r">
+						<label>
+							<i class="iconfont icon-search"></i><input type="search" class="weui-input" name="search" placeholder="请输入要搜索的商品">
+						</label>
+						<img src="https://ui.fhcloudapi.cn/urmyx/img03/search-close.png" alt="" id="close" class="icon-close" style="display: none;">
+					</div>
+					<button type="button" id="cancel">取消</button>
+				</div>
+			</div>
+		<input type="hidden" name="urmtoken" value="55f6b90dc806cd3cf543a9552552dbef_19559d6815607b149a13e867c30ecf13"></form>
+		<div class="search-history" id="history">
+			<p>历史记录</p>
+			<ul class="list"></ul>
+		</div>
+		<div class="hd_tj" style="background-color: transparent;">
+			<ul class="cl lilist" id="list" style="margin-top: .5rem;">
+				
+			</ul>
+			<div class="weui-loadmore loading" style="display: none;">
+				<i class="weui-loading"></i>
+				<span class="weui-loadmore__tips">正在加载</span>
+			</div>
+			<div class="weui-loadmore error" style="display: none;">
+				<span class="weui-loadmore__tips">暂无内容</span>
+			</div>
+		</div>
+		<style>
+			
+		</style>
+		<div class="g-nomore" style="display: none;" id="nomore">
+			<img src="https://ui.fhcloudapi.cn/urmyx/img03/g-nomore.png" alt="">
+			<p>— 暂时没有商品，敬请期待 —</p>
+		</div>
+	</div>
+
+	<script>
+		var page = 1;
+		var loading = false;
+		var infinite = false;
+		var $close = $('#close');
+		function _init() {
+			setTimeout(function (){
+			    $('input[name="search"]').focus();
+			},10)
+			getListData(true);
+			var _session = localStorage.getItem('searchHistory');
+			var _historyDom = '';
+			if (_session) {
+				_session = JSON.parse(_session);
+				for(var i = 0; i < _session.length; i++) {
+					_historyDom += '<li><p>'+_session[i]+'</p></li>';
+				}
+				$('#history .list').append(_historyDom);
+			}
+		}
+		function getListData(init) {
+			var init = init ? init : false;
+			var _val = $.trim($('input[name="search"]').val());
+			var _dom = '#list';
+			var $dom = $(_dom);
+			if (!_val) {
+				if (!init) {
+					$.toast('请输入搜索内容', 'text');
+				}
+				return false;
+			}
+			$(_dom).siblings('.weui-loadmore.error').hide();
+			$(_dom).siblings('.weui-loadmore.loading').show();
+			$('#nomore').hide();
+			$.post("/Home/Act/search.html", {search: _val, p: page}, function(data) {
+				$('#history').hide();
+				loading = false;
+				console.log(data);
+				if (data !== 'error') {
+					$(_dom).append(data);
+					infinite = false;
+				} else {
+					if ($(_dom).children().length) {
+						$(_dom).siblings('.weui-loadmore.error').show();
+					} else {
+						$('#nomore').show();
+					}
+				}
+				$close.show();
+				$(_dom).siblings('.weui-loadmore.loading').hide();
+			})
+			return true;
+		}
+		function saveSearchHistory() {
+			var _val = $('input[name="search"]').val();
+			var _session = localStorage.getItem('searchHistory');
+			if (_session) {
+				_session = JSON.parse(_session);
+			} else {
+				_session = [];
+			}
+			if (_session.length >= 20) {
+				_session.pop();
+			}
+			_session.unshift(_val);
+			_session = JSON.stringify(_session);
+			localStorage.setItem('searchHistory', _session);
+		}
+		function updateSearchHistory() {
+			var _val = $('input[name="search"]').val();
+			if ($('#history .list li').length >= 20) {
+				$('#history .list li:last-child').remove();
+			}
+			$('#history .list').prepend('<li><p>' + _val + '</p></li>');
+		}
+		function cancelSearch() {
+			page = 1;
+			$('input[name="search"]').val('');
+			$('#history').show();
+			$('#list').empty();
+			$('#list').siblings('.weui-loadmore.error').hide();
+			$('#nomore').hide();
+			$close.hide()
+		}
+		jQuery(document).ready(function($) {
+			_init();
+			$('#form').submit(function(e) {
+				e.preventDefault();
+				if (loading) return;
+				loading = true;
+				page = 1;
+				var is_null = getListData();
+				if(!is_null) return;
+				$('#list').empty();
+				saveSearchHistory();
+				updateSearchHistory();
+			})
+			$('#close').click(function(e) {
+				cancelSearch();
+			})
+			$('#cancel').click(function(e) {
+				window.location.replace("/Home/Act/b2c_index.html");
+			})
+			$('#history .list').on('click', 'li', function() {
+				$('input[name="search"]').val($(this).text());
+				if (loading) return;
+				loading = true;
+				getListData();
+			})
+			$(document.body).infinite().on("infinite", function() {
+				if (infinite) return;
+				infinite = true;
+				page ++;
+				getListData();
+			});
+		});
+	</script>
+
+
+<!--底部导航-->
+			<div class="footer_yx">
+			<ul class="cl">
+				<li class="current"><a href="/Home/Act/b2c_index.html"><i class="iconfont font20"></i><span>首页</span></a></li>
+				<li><a href="/Home/Act/index.html"><i class="iconfont font22"></i><span>活动</span></a></li>
+				<li><a href="/Home/Card/index.html"><i class="iconfont font18"></i><span>超级合伙人</span></a></li>
+				<li><a href="/Home/Shop/index.html"><i class="iconfont font18"></i><span>好店</span></a></li>
+				<li><a href="javascript:void(0)" id="user"><i class="iconfont font18"></i><span>我的</span></a></li>
+			</ul>
+		</div>
+		<style>
+		.suspension-container {
+			position: fixed;
+			bottom: 4rem;
+			bottom: calc(4rem + constant(safe-area-inset-bottom));
+			bottom: calc(4rem + env(safe-area-inset-bottom));
+			right: 10px;
+			z-index: 5;
+			width:4.2rem;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			justify-content: flex-end;
+		}
+	</style>
+	<div class="suspension-container">
+		
+		
+			<style>
+				.wx-kefu {
+					/* position: fixed;
+					bottom: 9rem;
+					bottom: calc(7.5rem + constant(safe-area-inset-bottom));
+					bottom: calc(7.5rem + env(safe-area-inset-bottom));
+					right: 10px;
+					z-index: 5;
+					width:4.2rem; */
+				}
+			</style>
+							<div class="wx-kefu" style="" id="wx-kefu">
+					<img src="https://ui.fhcloudapi.cn/xcx_urm/img/wx-kefu.png" alt="" class="" width="55">
+				</div>
+							</div>
+	
+	<input type="hidden" value="" name="user_id">
+	<input type="hidden" value="" name="back_url">
+	    <style>
+		.clee-mar{
+			margin: 0;
+		}
+		.clee-bor-t:before{
+			border-top-style: none;
+		}
+	</style>
+	<div id="login" class="weui-popup__container" style="position: absolute; z-index:500;">
+	  <div class="weui-popup__overlay"></div>
+	  <div class="weui-popup__modal" style="background:#fff;">
+	  	<div class="tr mt12 mr12">
+			<i class="iconfont font18" onclick="$.closePopup();$('#main').show();"></i>
+		</div>
+		<div class="weui-cells_form mt50 clee-mar">
+			<div class="weui-cell weui-cell_vcode clee-mar  clee-bor-t ml24 mt8 mr24 mb12 border-t-1 border-l-1 border-r-1 border-b-1 radius5 ht36 l-ht36">
+			<div class="weui-cell__hd per10">
+			<i class="iconfont font22 vertical-a-m"></i>
+			</div>
+			<div class="weui-cell__bd">
+			<input class="weui-input font14" type="number" name="phone" placeholder="请输入手机号">
+			</div>
+		</div>
+									<div class="weui-cell weui-cell_vcode clee-mar  clee-bor-t ml24 mt8 mr24 mb12 border-t-1 border-l-1 border-r-1 border-b-1 radius5 ht36 l-ht36">
+					<div class="weui-cell__hd per10">
+					  <i class="iconfont font22 vertical-a-m"></i>
+					</div>
+					<div class="weui-cell__bd">
+					  <input class="weui-input font14" type="number" id="vcode" name="vcode" placeholder="请输入图片验证码">
+					</div>
+					<div class="weui-cell__ft">
+					  <img src="/Home/Common/get_verify.html" id="vcodeImg" onclick="this.src='/Home/Common/get_verify.html'" class="ht28">
+					</div>
+				</div>
+						<div class="weui-cell weui-cell_vcode clee-mar  clee-bor-t ml24 mt8 mr24 mb12 border-t-1 border-l-1 border-r-1 border-b-1 radius5 ht36 l-ht36">
+				<div class="weui-cell__hd per10">
+				  <i class="iconfont font22 vertical-a-m"></i>
+				</div>
+				<div class="weui-cell__bd">
+				  <input class="weui-input font14" type="number" id="yancode" name="code" placeholder="请输入验证码">
+				</div>
+				<div class="weui-cell__ft">
+				  <button class="weui-vcode-btn yanzheng" type="button" style="color:#3c3c3c;">获取验证码</button>
+				</div>
+			</div>
+				</div>
+		<a href="javascript:;" class="weui-btn mt24 font14 loginbt ml24 mr24" style="background: #3c3c3c;">登录</a>
+		<div class="login_yx tc">
+	    	<p class="login_tit">资中优选</p>
+	    	<div class=" pos-r">
+				<span class=" pos-r">优选生活  从这里开始</span>
+				<em class="pos-a"></em>
+			</div>
+		</div>
+	  </div>
+	</div>
+
+		<script>
+	$(function(){
+		if($('.wrap').length>0){
+			$('.wrap').addClass('has_menu');
+		}else{
+			$('body').addClass('has_menu');
+		}
+
+
+	})
+
+    $('#user').click(function(){
+        is_login("/Home/User/index.html");
+
+    })
+
+    // $('#shop_list').click(function(){
+    // 	is_login("");
+    // })
+
+    function is_login(url){
+        var user_id = $('input[name=user_id]').val();
+        if(user_id>0){
+
+            window.location.href = url
+        }else{
+            $('input[name=back_url]').val(url)
+            $('#main').hide();
+            $("#login").popup();
+        }
+    }
+    // 客服
+    $('#wx-kefu').click(function(){
+    	$.alert({title:'长按识别二维码',text:'<img src="http://fimgds508.fhcloudapi.cn/urm_huodong/20181215/1544852846409.jpg" class="img_ewm mt6"/><a class="font12 display-b color_37" href="tel:13980905354"><i class="iconfont font14 mr4 color_org">&#xe63e;</i>联系客服：<span class="color_org">13980905354</span></a>'});
+    })
+	</script>
+</body></html>

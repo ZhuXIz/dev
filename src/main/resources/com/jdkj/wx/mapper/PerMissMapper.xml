@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jdkj.wx.mapper.PermissMapper">
+
+	<resultMap id="map" type="com.jdkj.wx.entity.Permiss">
+        <id column="pid" property="id" jdbcType="INTEGER"/>
+        <result column="pname" property="name" />
+
+		<association property="menu" javaType="com.jdkj.wx.entity.Menu">
+			<id column="mid" property="id" />
+			<result column="mname" property="name" />
+			<result column="p_id" property="pid" />
+		</association>
+		
+    </resultMap>
+    
+   <select id="getById" parameterType="int" resultMap="map">
+	   	SELECT p.id pid,p.name pname,m.id mid,m.name mname,m.p_id FROM j_permiss p left join j_permiss_menu pm on pm.permiss_id=p.id
+		left join j_menu m on pm.menu_id=m.id
+		WHERE p.id=#{id} order by m.p_id asc
+    </select>
+    
+    <insert id="addAllMenu" parameterType="java.util.List">
+     	insert into j_permiss_menu
+           (permiss_id, menu_id)
+           values
+            <foreach collection ="list" item="obj" index= "index" separator =",">
+                (#{obj.pId},#{obj.mId})
+            </foreach >
+    
+    </insert>
+    
+</mapper>

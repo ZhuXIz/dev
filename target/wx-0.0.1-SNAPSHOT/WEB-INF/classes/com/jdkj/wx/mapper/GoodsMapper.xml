@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jdkj.wx.mapper.GoodsMapper">
+
+	<resultMap id="goodsMap" type="com.jdkj.wx.entity.Goods">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="titleName" property="titleName" />
+        <result column="titleImage" property="titleImage" />
+        <result column="payType" property="payType" />
+        <result column="publish" property="publish" />
+        <result column="oldPrice" property="oldPrice"/>
+        <result column="price" property="price"/>
+        <result column="soldNum" property="soldNum"/>
+        <result column="resNum" property="resNum" />
+        <result column="browNum" property="browNum"/>
+        <result column="sufTime" property="sufTime"/>
+        <result column="preTime" property="preTime"/>
+        <result column="isRecommend" property="isRecommend"/>
+        <result column="isValid" property="isValid"/>
+		<result column="itemSrc" property="itemSrc"/>
+
+		<association property="seller" javaType="com.jdkj.wx.entity.Seller">
+			<id column="sId" property="id" />
+			<result column="name" property="name" />
+            <result column="onTime" property="onTime" />
+            <result column="phoneNum" property="phoneNum" />
+            <result column="phoneName" property="phoneName" />
+            <result column="address" property="address" />
+            <result column="addressStr" property="addressStr" />
+            <result column="introduceText" property="introduceText" />
+            <result column="introduceImage" property="introduceImage" />		
+		</association>
+		
+		<association property="goodsType" javaType="com.jdkj.wx.entity.GoodsType">
+			<id column="tId" property="id" />
+			<result column="genreName" property="genreName" />
+		</association>
+		
+		<collection property="images" select="com.jdkj.wx.mapper.GoodsImageMapper.getByGoodsId"
+		 column="id">
+			<id property="id" column="id" />
+			<result property="image" column="image" />
+		</collection>
+		
+		
+		
+    </resultMap>
+    
+   <select id="getById" parameterType="int" resultMap="goodsMap">
+       SELECT g.id,g.payType,g.itemSrc,
+			g.titleName,g.titleImage,g.publish,g.oldPrice,g.price,
+			g.soldNum,g.resNum,g.browNum,g.preTime,g.sufTime,
+			g.isRecommend,g.isValid,s.id sId,s.name,s.onTime,
+			s.phoneNum,s.phoneName,s.address,s.addressStr,s.introduceText,
+			s.introduceImage,t.id tId,t.genreName
+			from j_goods g 
+			Left JOIN j_seller s on g.seller_id=s.id
+			Left JOIN j_goods_type t on g.type_id=t.id
+			WHERE g.id=${id};
+    </select>
+
+
+
+
+
+	<select id="getMoreByType" parameterType="com.jdkj.wx.query.GoodsQuery" resultType="com.jdkj.wx.entity.Goods">
+       SELECT id,titleName,titleImage,oldPrice,price,soldNum,isValid 
+       FROM j_goods 
+		<if test="typeId!= null">
+			where type_id=#{typeId} 
+		</if> 
+       ORDER BY isValid desc,isRecommend desc,publish desc
+       limit ${begin},${end}
+    </select>
+    
+	<select id="getCountByType" parameterType="com.jdkj.wx.query.GoodsQuery" resultType="long">
+      SELECT count(*) from j_goods 
+		<if test="typeId!= null">
+			where type_id=#{typeId} 
+		</if> 
+    </select>
+
+
+	<!--  	
+	使用XML定义新增时可以使用到全局的useGeneratedKeys
+	<insert id="addCompany" keyProperty="id">
+		INSERT INTO company VALUES(NULL, #{name})
+	</insert>
+	-->	
+	
+	
+	
+	<resultMap id="map" type="com.jdkj.wx.entity.Goods">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="titleName" property="titleName" />
+        <result column="titleImage" property="titleImage" />
+        <result column="payType" property="payType" />
+        <result column="publish" property="publish" />
+        <result column="oldPrice" property="oldPrice"/>
+        <result column="price" property="price"/>
+        <result column="soldNum" property="soldNum"/>
+        <result column="resNum" property="resNum" />
+        <result column="browNum" property="browNum"/>
+        <result column="sufTime" property="sufTime"/>
+        <result column="preTime" property="preTime"/>
+        <result column="isRecommend" property="isRecommend"/>
+        <result column="isValid" property="isValid"/>
+		<result column="itemSrc" property="itemSrc"/>
+
+		<association property="seller" javaType="com.jdkj.wx.entity.Seller">
+			<id column="sId" property="id" />
+			<result column="name" property="name" />
+            <result column="onTime" property="onTime" />
+            <result column="phoneNum" property="phoneNum" />
+            <result column="phoneName" property="phoneName" />
+            <result column="address" property="address" />
+            <result column="addressStr" property="addressStr" />
+            <result column="introduceText" property="introduceText" />
+            <result column="introduceImage" property="introduceImage" />		
+		</association>
+		<association property="goodsType" javaType="com.jdkj.wx.entity.GoodsType">
+			<id column="tId" property="id" />
+			<result column="genreName" property="genreName" />
+		</association>
+		
+		<collection property="images" select="com.jdkj.wx.mapper.GoodsImageMapper.getByGoodsId"
+		 column="id">
+			<id property="id" column="id" />
+			<result property="image" column="image" />
+		</collection>
+		
+    </resultMap>
+    
+   <select id="getAllQuery" parameterType="com.jdkj.wx.query.GoodsQuery" resultMap="map">
+       SELECT g.id,g.payType,g.itemSrc,
+			g.titleName,g.titleImage,g.publish,g.oldPrice,g.price,
+			g.soldNum,g.resNum,g.browNum,g.preTime,g.sufTime,
+			g.isRecommend,g.isValid,s.id sId,s.name,s.onTime,
+			s.phoneNum,s.phoneName,s.address,s.addressStr,s.introduceText,
+			s.introduceImage,t.id tId,t.genreName
+			from j_goods g 
+			Left JOIN j_seller s on g.seller_id=s.id
+			Left JOIN j_goods_type t on g.type_id=t.id
+			limit #{begin},#{end};
+    </select>
+    
+    
+    
+    
+    
+    
+    
+    	<resultMap id="map2" type="com.jdkj.wx.entity.Goods">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="titleName" property="titleName" />
+        <result column="titleImage" property="titleImage" />
+        <result column="payType" property="payType" />
+        <result column="publish" property="publish" />
+        <result column="oldPrice" property="oldPrice"/>
+        <result column="price" property="price"/>
+        <result column="soldNum" property="soldNum"/>
+        <result column="resNum" property="resNum" />
+        <result column="browNum" property="browNum"/>
+        <result column="sufTime" property="sufTime"/>
+        <result column="preTime" property="preTime"/>
+        <result column="isRecommend" property="isRecommend"/>
+        <result column="isValid" property="isValid"/>
+		<result column="itemSrc" property="itemSrc"/>
+		
+		<association property="goodsType" javaType="com.jdkj.wx.entity.GoodsType">
+			<id column="tId" property="id" />
+			<result column="genreName" property="genreName" />
+		</association>
+		
+		<association property="seller" javaType="com.jdkj.wx.entity.Seller">
+			<id column="sId" property="id" />
+			<result column="name" property="name" />
+		</association>
+		
+		<collection property="images" select="com.jdkj.wx.mapper.GoodsImageMapper.getByGoodsId"
+		 column="id">
+			<id property="id" column="id" />
+			<result property="image" column="image" />
+		</collection>
+		
+    </resultMap>
+    
+   <select id="getSellerGoods" parameterType="com.jdkj.wx.query.GoodsQuery" resultMap="map2">
+       SELECT g.id,g.payType,g.itemSrc,
+			g.titleName,g.titleImage,g.publish,g.oldPrice,g.price,
+			g.soldNum,g.resNum,g.browNum,g.preTime,g.sufTime,
+			g.isRecommend,g.isValid,s.id sId,s.name,s.onTime,
+			s.phoneNum,s.phoneName,s.address,s.addressStr,s.introduceText,
+			s.introduceImage,t.id tId,t.genreName
+			from j_goods g 
+			Left JOIN j_seller s on g.seller_id=s.id
+			Left JOIN j_goods_type t on g.type_id=t.id
+			where seller_id = #{sellerId} order by isValid desc,publish desc limit #{begin},#{end}
+    </select>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <resultMap id="map3" type="com.jdkj.wx.entity.Goods">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="titleName" property="titleName" />
+        <result column="titleImage" property="titleImage" />
+        <result column="payType" property="payType" />
+        <result column="publish" property="publish" />
+        <result column="oldPrice" property="oldPrice"/>
+        <result column="price" property="price"/>
+        <result column="soldNum" property="soldNum"/>
+        <result column="resNum" property="resNum" />
+        <result column="browNum" property="browNum"/>
+        <result column="sufTime" property="sufTime"/>
+        <result column="preTime" property="preTime"/>
+        <result column="isRecommend" property="isRecommend"/>
+        <result column="isValid" property="isValid"/>
+		<result column="itemSrc" property="itemSrc"/>
+		
+		<association property="goodsType" javaType="com.jdkj.wx.entity.GoodsType">
+			<id column="tId" property="id" />
+			<result column="genreName" property="genreName" />
+		</association>
+		
+		<collection property="images" select="com.jdkj.wx.mapper.GoodsImageMapper.getByGoodsId"
+		 column="id">
+			<id property="id" column="id" />
+			<result property="image" column="image" />
+		</collection>
+		
+    </resultMap>
+    
+   <select id="getAllGoodsBySeller" parameterType="com.jdkj.wx.entity.Goods" resultMap="map3">
+       SELECT g.id,g.payType,g.itemSrc,
+			g.titleName,g.titleImage,g.publish,g.oldPrice,g.price,
+			g.soldNum,g.resNum,g.browNum,g.preTime,g.sufTime,
+			g.isRecommend,g.isValid,s.id sId,s.name,s.onTime,
+			s.phoneNum,s.phoneName,s.address,s.addressStr,s.introduceText,
+			s.introduceImage,t.id tId,t.genreName
+			from j_goods g 
+			Left JOIN j_seller s on g.seller_id=s.id
+			Left JOIN j_goods_type t on g.type_id=t.id
+			WHERE 1 = 1 and seller_id = #{sellerId} 
+			<if test="titleName!=null and titleName !=''">
+			AND titleName LIKE CONCAT('%',#{keyWords},'%')
+			</if>
+			order by isValid desc,publish desc LIMIT #{offset},#{limit}
+    </select>
+        
+<select id="getTotal" resultType="int">
+	SELECT count(*) FROM j_goods WHERE 1 = 1
+	and seller_id = #{sellerId}
+	<if test="titleName!=null and titleName !=''">
+	AND titleName LIKE CONCAT('%',#{keyWords},'%')
+	</if>
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <resultMap id="map4" type="com.jdkj.wx.entity.Goods">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="titleName" property="titleName" />
+        <result column="titleImage" property="titleImage" />
+        <result column="payType" property="payType" />
+        <result column="publish" property="publish" />
+        <result column="oldPrice" property="oldPrice"/>
+        <result column="price" property="price"/>
+        <result column="soldNum" property="soldNum"/>
+        <result column="resNum" property="resNum" />
+        <result column="browNum" property="browNum"/>
+        <result column="sufTime" property="sufTime"/>
+        <result column="preTime" property="preTime"/>
+        <result column="isRecommend" property="isRecommend"/>
+        <result column="isValid" property="isValid"/>
+		<result column="itemSrc" property="itemSrc"/>
+		
+		<association property="goodsType" javaType="com.jdkj.wx.entity.GoodsType">
+			<id column="tId" property="id" />
+			<result column="genreName" property="genreName" />
+		</association>
+		
+		<association property="spellList" javaType="com.jdkj.wx.entity.SpellList">
+			<id column="lId" property="id" />
+			<result column="LstartTime" property="startTime" />
+			<result column="LendTime" property="endTime" />
+			<result column="Lprice" property="price" />
+			<result column="Lnum" property="num" />
+			<result column="Lstate" property="state" />
+		</association>
+		
+		<association property="seller" javaType="com.jdkj.wx.entity.Seller">
+			<id column="sId" property="id" />
+			<result column="sName" property="name" />
+			<result column="onTime" property="onTime" />
+			<result column="phoneNum" property="phoneNum" />
+			<result column="phoneName" property="phoneName" />
+			<result column="address" property="address" />
+			<result column="addressStr" property="addressStr" />
+			<result column="introduceText" property="introduceText" />
+			<result column="introduceImage" property="introduceImage" />
+		</association>
+		
+		
+		<collection property="images" select="com.jdkj.wx.mapper.GoodsImageMapper.getByGoodsId"
+		 column="id">
+			<id property="id" column="id" />
+			<result property="image" column="image" />
+		</collection>
+		
+    </resultMap>
+    
+   <select id="getAllGoods" parameterType="com.jdkj.wx.entity.Goods" resultMap="map4">
+       SELECT g.id,g.payType,g.itemSrc,
+			g.titleName,g.titleImage,g.publish,g.oldPrice,g.price,
+			g.soldNum,g.resNum,g.browNum,g.preTime,g.sufTime,
+			g.isRecommend,g.isValid,s.id sId,s.name sName,s.onTime,
+			s.phoneNum,s.phoneName,s.address,s.addressStr,s.introduceText,
+			s.introduceImage,t.id tId,t.genreName,l.id lId,
+			l.startTime LstartTime,l.endTime LendTime,l.price Lprice,
+			l.num Lnum,l.state Lstate
+			from j_goods g 
+			Left JOIN j_seller s on g.seller_id=s.id
+			Left JOIN j_goods_type t on g.type_id=t.id
+			Left JOIN j_list l on l.goods_id=g.id
+			WHERE 1 = 1
+			<if test="titleName!=null and titleName !=''">
+			AND titleName LIKE CONCAT('%',#{keyWords},'%')
+			</if>
+			order by isValid desc,publish desc LIMIT #{offset},#{limit}
+    </select>
+        
+<select id="getAllGoodsTotal" resultType="int">
+	SELECT count(*) FROM j_goods WHERE 1 = 1
+	<if test="titleName!=null and titleName !=''">
+	AND titleName LIKE CONCAT('%',#{keyWords},'%')
+	</if>
+</select>
+</mapper>

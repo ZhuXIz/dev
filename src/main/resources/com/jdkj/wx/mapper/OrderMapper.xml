@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jdkj.wx.mapper.OrderMapper">
+
+	<resultMap id="orderMap" type="com.jdkj.wx.entity.Order">
+        <id column="oid" property="id"/>
+        <result column="oTime" property="oTime" />
+        <result column="isValid" property="isValid" />
+        <result column="price" property="price" />
+        <result column="payPrcie" property="payPrcie" />
+        <result column="oname" property="name" />
+         <association property="goods" javaType="com.jdkj.wx.entity.Goods">
+			<id column="gid" property="id" />
+			<result column="titleName" property="titleName" />
+            <result column="titleImage" property="titleImage" />
+            <result column="sufTime" property="sufTime" />
+            
+		</association>
+       
+
+		<association property="seller" javaType="com.jdkj.wx.entity.Seller">
+			<id column="sid" property="id" />
+            <result column="name" property="name" />
+            <result column="phoneNum" property="phoneNum" />
+            <result column="phoneName" property="phoneName" />
+		</association>
+		</resultMap>
+    <select id="getOrder" parameterType="com.jdkj.wx.query.BaseQuery" resultMap="orderMap">
+       SELECT o.id oid,o.name oname,o.oTime,o.isValid,o.price,o.payPrice,s.id sid,s.name name,s.phoneName,s.phoneNum,g.id gid,g.titleName titleName,
+       g.titleImage titleImage,g.sufTime sufTime
+			from j_order o
+			Left JOIN j_seller s on o.seller_id=s.id 
+			Left JOIN j_goods g on o.goods_id=g.id
+			WHERE o.user_id=#{userId} order by o.oTime desc limit #{begin},#{end}
+    </select>
+<!-- 	**************************************************************************************************** -->
+    
+
+    <resultMap id="sellerMap" type="com.jdkj.wx.entity.Order">
+        <id column="oid" property="id"/>
+        <result column="oTime" property="oTime" />
+        <result column="isValid" property="isValid" />
+        <result column="name" property="name" />
+        <result column="phoneNum" property="phoneNum" />
+        <result column="price" property="price" />
+        <result column="payPrice" property="payPrice" />
+        
+         <association property="goods" javaType="com.jdkj.wx.entity.Goods">
+			<id column="gid" property="id" />
+			<result column="titleImage" property="titleImage" />
+            <result column="titleName" property="titleName" />
+             <result column="sufTime" property="sufTime" />
+		</association>
+       
+
+		<association property="user" javaType="com.jdkj.wx.entity.User">
+			<id column="uid" property="id" />
+		</association>
+		
+    </resultMap>
+    <select id="getSellerOrder" parameterType="com.jdkj.wx.query.OrderQuery" resultMap="sellerMap">
+       SELECT o.id oid,o.oTime,o.isValid,o.name,o.phoneNum,o.price,o.payPrice,u.id uid,g.id gid,
+       g.titleImage,g.titleName titleName,g.sufTime
+			from j_order o
+			Left JOIN j_user u on u.id=o.user_id 
+			Left JOIN j_goods g on o.goods_id=g.id 
+			WHERE o.seller_id=#{userId} AND ( 1=1
+			<if test="name!=null and name !=''">
+				and o.name LIKE CONCAT('%',#{keyWords},'%')
+			</if>
+			
+			<if test="phoneNum!=null and phoneNum !=''">
+				or u.phoneNum LIKE CONCAT('%',#{keyWords},'%')
+			</if>
+			)order by o.oTime desc limit #{begin},#{end}
+    </select>
+	<!-- 	**************************************************************************************************** -->
+	
+	<!--  	
+	使用XML定义新增时可以使用到全局的useGeneratedKeys
+	<insert id="addCompany" keyProperty="id">
+		INSERT INTO company VALUES(NULL, #{name})
+	</insert>
+	-->	
+	
+	<update id="updateOrder" parameterType="int">
+		update j_order set isValid=2 
+		<where>
+			<!-- 应用sql片段的id，如果refid指定的id不再本mapper文件中，需要前边加namespace -->
+			<include refid="query_order_where"></include>
+			<!-- 在这里还可能要引用其他的sql片段 -->
+		</where>
+	</update>
+	
+	<sql id="query_order_where">
+	<if test="list!=null||list.size()!=0"> 
+		<foreach collection="list" item="id" open="AND (" close=")" separator="OR">
+			id = #{id}
+		</foreach>
+	</if>
+	</sql>
+	
+		
+
+<select id="getTotal" parameterType="com.jdkj.wx.entity.Order" resultType="int">
+       SELECT count(*) from j_order 
+      	 where 1=1
+		<if test="name!=null||name!=''">
+			AND name LIKE CONCAT('%',#{keyWords},'%')
+		</if>
+		<if test="phoneNum!=null||phoneNum!=''">
+			AND phoneNum LIKE CONCAT('%',#{keyWords},'%')
+		</if>
+</select>
+
+<resultMap id="orderMap2" type="com.jdkj.wx.entity.Order">
+        <id column="oid" property="id"/>
+        <result column="oTime" property="oTime" />
+        <result column="isValid" property="isValid" />
+        <result column="price" property="price" />
+        <result column="payPrice" property="payPrice" />
+        <result column="oname" property="name" />
+        <result column="oPhoneNum" property="phoneNum" />
+        <association property="goods" javaType="com.jdkj.wx.entity.Goods">
+			<id column="gid" property="id" />
+			<result column="titleName" property="titleName" />
+            <result column="titleImage" property="titleImage" />
+            <result column="sufTime" property="sufTime" />
+            <result column="payType" property="payType" />
+		</association>
+       
+
+		<association property="seller" javaType="com.jdkj.wx.entity.Seller">
+			<id column="sid" property="id" />
+            <result column="name" property="name" />
+            <result column="sPhoneNum" property="phoneNum" />
+            <result column="sPhoneName" property="phoneName" />
+		</association>
+		<association property="user" javaType="com.jdkj.wx.entity.User">
+			<id column="uid" property="id" />
+            <result column="uName" property="name" />
+            <result column="uPhoneNum" property="phoneNum" />
+            <result column="uPhoneName" property="phoneName" />
+		</association>
+</resultMap>
+    <select id="getAllByOrder" parameterType="com.jdkj.wx.entity.Order" resultMap="orderMap2">
+       SELECT o.id oid,o.name oname,o.phoneNum oPhoneNum,o.oTime,o.isValid,o.price,o.payPrice,s.id sid,s.name name,s.phoneName sPhoneName,s.phoneNum sPhoneNum,g.id gid,g.titleName titleName,
+       g.titleImage titleImage,g.sufTime sufTime,g.payType,u.id uid,u.name uName,u.phoneName uPhoneName,u.phoneNum uPhoneNum
+			from j_order o
+			Left JOIN j_seller s on o.seller_id=s.id
+			Left JOIN j_user u on o.user_id=u.id 
+			Left JOIN j_goods g on o.goods_id=g.id
+			where 1=1
+			order by o.oTime desc limit  #{offset},#{limit}
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+     <resultMap id="map4" type="com.jdkj.wx.entity.Order">
+        <id column="oid" property="id"/>
+        <result column="oTime" property="oTime" />
+        <result column="isValid" property="isValid" />
+        <result column="price" property="price" />
+        <result column="payPrice" property="payPrice" />
+        <result column="oname" property="name" />
+        <result column="oPhoneNum" property="phoneNum" />
+        <result column="type" property="type" />
+        
+        <association property="goods" javaType="com.jdkj.wx.entity.Goods">
+			<id column="gid" property="id" />
+			<result column="titleName" property="titleName" />
+            <result column="titleImage" property="titleImage" />
+            <result column="sufTime" property="sufTime" />
+            <result column="payType" property="payType" />
+		</association>
+       
+
+		<association property="seller" javaType="com.jdkj.wx.entity.Seller">
+			<id column="sid" property="id" />
+            <result column="name" property="name" />
+            <result column="sPhoneNum" property="phoneNum" />
+            <result column="sPhoneName" property="phoneName" />
+		</association>
+		
+		<association property="user" javaType="com.jdkj.wx.entity.User">
+			<id column="uid" property="id" />
+            <result column="uName" property="name" />
+            <result column="uPhoneNum" property="phoneNum" />
+            <result column="uPhoneName" property="phoneName" />
+		</association>
+    </resultMap>
+    
+   <select id="getById" parameterType="int" resultMap="map4">
+    SELECT o.id oid,o.name oname,o.phoneNum oPhoneNum,o.oTime,o.isValid,o.price,o.payPrice,o.type,s.id sid,s.name name,s.phoneName sPhoneName,s.phoneNum sPhoneNum,g.id gid,g.titleName titleName,
+       g.titleImage titleImage,g.sufTime sufTime,g.payType,u.id uid,u.name uName,u.phoneName uPhoneName,u.phoneNum uPhoneNum FROM j_order o 
+    left join j_goods g on g.id=o.goods_id 
+    left join j_seller s on s.id=o.seller_id 
+    left join j_user u on u.id=o.user_id 
+    WHERE o.id=#{id}
+    </select>
+	
+</mapper>

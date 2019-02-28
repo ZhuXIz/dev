@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jdkj.wx.mapper.EvaluateMapper">
+
+	<resultMap id="eMap" type="com.jdkj.wx.entity.Evaluate">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="eTime" property="eTime" />
+		<result column="message" property="message" />
+
+		<association property="user" javaType="com.jdkj.wx.entity.User">
+			<id column="uId" property="id"/>
+			<result column="name" property="name" />
+		</association>
+
+    </resultMap>
+	
+	 <select id="getEvaluate" parameterType="com.jdkj.wx.query.EvaluateQuery" resultMap="eMap">
+       SELECT e.eTime,e.message,u.name,u.id uId
+       FROM j_evaluate e left join 
+       j_user u on e.user_id =u.id 
+       WHERE goods_id=#{goodsId} limit #{begin},#{end}
+    </select>
+
+	
+</mapper>

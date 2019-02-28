@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jdkj.wx.mapper.MenuMapper">
+
+	<resultMap id="menuMap" type="com.jdkj.wx.entity.Menu">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="url" property="url" />
+        <result column="name" property="name" />
+        <result column="icon" property="icon" />
+		
+		<collection property="menus" select="com.jdkj.wx.mapper.MenuMapper.getMenuItem" 
+		column="id">
+			<id column="mid" property="id" jdbcType="INTEGER"/>
+	        <result column="url" property="url" />
+	        <result column="name" property="name" />
+	        <result column="icon" property="icon" />
+		</collection>
+		
+		
+		
+    </resultMap>
+    
+   <select id="show" resultMap="menuMap">
+ SELECT *
+		from j_menu
+		where ISNULL(p_id) or p_id = '' or p_id=0;
+    </select>
+    
+    
+    
+    
+    <resultMap id="map10" type="com.jdkj.wx.entity.Menu">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="url" property="url" />
+        <result column="name" property="name" />
+        <result column="icon" property="icon" />
+		
+		<collection property="menus" select="com.jdkj.wx.mapper.MenuMapper.getAllMenuItem" 
+		column="id">
+			<id column="mid" property="id" jdbcType="INTEGER"/>
+	        <result column="url" property="url" />
+	        <result column="name" property="name" />
+	        <result column="icon" property="icon" />
+		</collection>
+		
+		
+		
+    </resultMap>
+    
+   <select id="getAllMenu" resultMap="map10">
+ SELECT *
+		from j_menu
+		where ISNULL(p_id) or p_id = '' or p_id=0;
+    </select>
+    
+    
+    
+    
+    
+    <resultMap id="mMap" type="com.jdkj.wx.entity.Menu">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="url" property="url" />
+        <result column="name" property="name" />
+        <result column="icon" property="icon" />
+		
+		<collection property="menus" select="com.jdkj.wx.mapper.MenuMapper.getMenuItem" 
+		column="{pId=id,permissId=permiss_id}">
+			<id column="mid" property="id" jdbcType="INTEGER"/>
+	        <result column="url" property="url" />
+	        <result column="name" property="name" />
+	        <result column="icon" property="icon" />
+		</collection>
+		
+		
+		
+    </resultMap>
+    
+    
+    <!--     拿到该角色的一级菜单 -->
+   <select id="getMenuByRole" parameterType="int" resultMap="mMap">
+   
+	   SELECT m.*,p.permiss_id
+			from j_permiss_menu p left join
+			j_menu m on p.menu_id=m.id
+			where p.permiss_id=
+		    (select permiss_id from j_employee where id=#{id}) and (ISNULL(p_id) or p_id = '' or p_id=0);
+    </select>
+    
+    
+<!--     拿到该角色的二级菜单 -->
+  
+    
+<!--     <select id="show" resultType="com.jdkj.wx.entity.Menu">
+   
+      SELECT *
+		from j_menu m LEFT JOIN
+		j_menu e on m.id=e.p_id
+		where ISNULL(m.p_id);
+    </select> -->
+	
+</mapper>

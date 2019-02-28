@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jdkj.wx.mapper.EmployeeMapper">
+
+		<resultMap id="objMap" type="com.jdkj.wx.entity.Employee">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" />
+		<result column="pwd" property="pwd" />
+		<association property="permiss" javaType="com.jdkj.wx.entity.Permiss">
+			<id column="pid" property="id" />
+			<result column="pname" property="name" />
+		</association>
+		
+    </resultMap>
+    
+   <select id="getAllQuery" parameterType="com.jdkj.wx.query.EmployeeQuery" resultMap="objMap">
+       SELECT e.*,p.id pid,p.name pname FROM j_employee e left join j_permiss p on e.permiss_id=p.id
+        where e.name LIKE CONCAT('%',#{keyWords},'%') order by e.permiss_id Asc limit #{begin},#{end}
+    </select>
+    
+    
+    <resultMap id="map1" type="com.jdkj.wx.entity.Employee">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" />
+		<result column="pwd" property="pwd" />
+		<association property="permiss" javaType="com.jdkj.wx.entity.Permiss">
+			<id column="pId" property="id" />
+			<result column="pName" property="name" />
+		</association>
+		
+    </resultMap>
+    
+    <select id="getById" parameterType="int" resultMap="map1">
+      SELECT e.*,p.id pId,p.name pName FROM j_employee e left join j_permiss p on p.id=e.permiss_id WHERE e.id=#{id}
+    </select>
+	
+</mapper>
